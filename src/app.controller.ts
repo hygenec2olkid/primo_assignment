@@ -1,17 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { AppService } from './app.service';
+import { GetEncryptDataDto } from './dto/get-encrypt-data.dto';
+import { GetDecryptDataDto } from './dto/get-decrypt-data.dto';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Post('get-encrypt-data')
+  getEncryptData(@Body() body: GetEncryptDataDto): any {
+    return this.appService.getEncryptData(body);
   }
 
-  @Get('test')
-  getTest(): string {
-    return this.appService.getHello('test');
+  @Post('get-decrypt-data')
+  getDecryptData(@Body() body: GetDecryptDataDto): any {
+    return this.appService.getDecryptData(body);
   }
 }
